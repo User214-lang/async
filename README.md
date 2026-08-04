@@ -132,7 +132,8 @@ timeout_total: 30           # общий таймаут запроса, сек
 ---
 
 ## 🗂️ Структура проекта
-'''text
+
+```text
 async-crawler/
 ├── crawler.py              # Ядро: класс AsyncCrawler, оркестрация обхода
 ├── crawler_cli.py          # CLI-интерфейс на argparse
@@ -151,7 +152,7 @@ async-crawler/
 ├── sitemap_parser.py       # Парсинг sitemap.xml
 ├── config.yaml             # Пример конфигурации
 ├── requirements.txt        # Зависимости проекта
-├── tests.py                # тесты
+├── tests.py                # Тесты (pytest)
 ├── demo/                   # Демонстрационные скрипты
 │   ├── final_demo_crawler.py
 │   ├── demo_retry.py
@@ -160,13 +161,13 @@ async-crawler/
 │   ├── demo_crawler.py
 │   ├── demo_crawler_advanced.py
 │   └── demo_parser.py
-├── results/                ## Актуальные результаты краулинга
+├── results/                # Актуальные результаты краулинга
 │   ├── result.json
 │   ├── stats.json
 │   ├── report.html
 │   └── crawler.log
 └── archive/
-'''
+```
 
 ---
 
