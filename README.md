@@ -26,9 +26,9 @@ rate limiting, robots.txt, автоматических повторов, сох
 python demo/final_demo_crawler.py --mode deep --pages 3000 --depth 6
 ```
 
-Логи: [`results.log`](results/results.log)
+Логи: [`results.log`](results/crawler.log)
 
-Результат: [`report.html`](results/report.html)
+Результат: [`report.html`](results/report.html) исправить!!!
 
 Папка с результатами: [`results/`](results/)
 
