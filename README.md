@@ -28,7 +28,7 @@ python demo/final_demo_crawler.py --mode deep --pages 3000 --depth 6
 
 Логи: [`results.log`](results/crawler.log)
 
-Результат: [`report.html`](results/report.html) исправить!!!
+Результат: [открыть HTML-отчёт](https://user214-lang.github.io/async/results/report.html)
 
 Папка с результатами: [`results/`](results/)
 
