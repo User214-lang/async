@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Отчёт краулера</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .container { max-width: 1000px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { color: #333; border-bottom: 2px solid #4CAF50; padding-bottom: 10px; }
+        h2 { color: #555; margin-top: 30px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0; }
+        .stat-card { background: #f9f9f9; padding: 15px; border-radius: 6px; text-align: center; border-left: 4px solid #4CAF50; }
+        .stat-card .value { font-size: 28px; font-weight: bold; color: #333; }
+        .stat-card .label { font-size: 14px; color: #777; margin-top: 5px; }
+        .bar-container { margin: 10px 0; }
+        .bar-label { display: flex; justify-content: space-between; font-size: 14px; }
+        .bar { background: #4CAF50; height: 20px; border-radius: 4px; transition: width 0.3s; }
+        .bar-wrapper { background: #e0e0e0; border-radius: 4px; overflow: hidden; }
+        .bar-domain { background: #2196F3; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { padding: 8px 12px; border: 1px solid #ddd; text-align: left; }
+        th { background: #4CAF50; color: white; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .footer { margin-top: 30px; font-size: 12px; color: #aaa; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Отчёт о работе краулера</h1>
+        <p><strong>Дата генерации:</strong> 2026-08-05 14:38:40</p>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="value">3109</div>
+                <div class="label">Всего обработано</div>
+            </div>
+            <div class="stat-card" style="border-left-color: #4CAF50;">
+                <div class="value">3004</div>
+                <div class="label">Успешных запросов</div>
+            </div>
+            <div class="stat-card" style="border-left-color: #f44336;">
+                <div class="value">105</div>
+                <div class="label">Неудачных запросов</div>
+            </div>
+            <div class="stat-card" style="border-left-color: #FF9800;">
+                <div class="value">0.61</div>
+                <div class="label">Средняя скорость (стр/с)</div>
+            </div>
+            <div class="stat-card" style="border-left-color: #9C27B0;">
+                <div class="value">0.815</div>
+                <div class="label">Среднее время ответа (с)</div>
+            </div>
+            <div class="stat-card" style="border-left-color: #3F51B5;">
+                <div class="value">5086.72</div>
+                <div class="label">Время работы (с)</div>
+            </div>
+        </div>
+        
+        <h2>Распределение по статус-кодам</h2>
+        <div>
+
+            <div class="bar-container">
+                <div class="bar-label"><span>200</span><span>3004</span></div>
+                <div class="bar-wrapper"><div class="bar" style="width: 100.0%;"></div></div>
+            </div>
+
+            <div class="bar-container">
+                <div class="bar-label"><span>error</span><span>105</span></div>
+                <div class="bar-wrapper"><div class="bar" style="width: 3.5%;"></div></div>
+            </div>
+
+        </div>
+        
+        <h2>Топ доменов по количеству страниц</h2>
+        <div>
+
+            <div class="bar-container">
+                <div class="bar-label"><span>books.toscrape.com</span><span>2351</span></div>
+                <div class="bar-wrapper"><div class="bar bar-domain" style="width: 100.0%;"></div></div>
+            </div>
+
+            <div class="bar-container">
+                <div class="bar-label"><span>quotes.toscrape.com</span><span>653</span></div>
+                <div class="bar-wrapper"><div class="bar bar-domain" style="width: 27.8%;"></div></div>
+            </div>
+
+            <div class="bar-container">
+                <div class="bar-label"><span>httpbin.org</span><span>95</span></div>
+                <div class="bar-wrapper"><div class="bar bar-domain" style="width: 4.0%;"></div></div>
+            </div>
+
+            <div class="bar-container">
+                <div class="bar-label"><span>www.goodreads.com</span><span>4</span></div>
+                <div class="bar-wrapper"><div class="bar bar-domain" style="width: 0.2%;"></div></div>
+            </div>
+
+            <div class="bar-container">
+                <div class="bar-label"><span>www.zyte.com</span><span>4</span></div>
+                <div class="bar-wrapper"><div class="bar bar-domain" style="width: 0.2%;"></div></div>
+            </div>
+
+            <div class="bar-container">
+                <div class="bar-label"><span>this-domain-definitely-does-not-exist-12345.com</span><span>1</span></div>
+                <div class="bar-wrapper"><div class="bar bar-domain" style="width: 0.0%;"></div></div>
+            </div>
+
+            <div class="bar-container">
+                <div class="bar-label"><span>nonexistent-test-domain-98765.com</span><span>1</span></div>
+                <div class="bar-wrapper"><div class="bar bar-domain" style="width: 0.0%;"></div></div>
+            </div>
+
+        </div>
+        
+        <h2>Детальная статистика</h2>
+        <table>
+            <tr><th>Показатель</th><th>Значение</th></tr>
+            <tr><td>Всего обработано</td><td>3109</td></tr>
+            <tr><td>Успешных запросов</td><td>3004</td></tr>
+            <tr><td>Неудачных запросов</td><td>105</td></tr>
+            <tr><td>Средняя скорость</td><td>0.61 стр/с</td></tr>
+            <tr><td>Среднее время ответа</td><td>0.815 с</td></tr>
+            <tr><td>Время работы</td><td>5086.72 с</td></tr>
+            <tr><td>Начало работы</td><td>1970-01-01T23:50:39.631113</td></tr>
+            <tr><td>Окончание работы</td><td>1970-01-02T01:15:26.349522</td></tr>
+        </table>
+        
+        <div class="footer">
+            Отчёт создан автоматически. Данные собраны во время работы краулера.
+        </div>
+    </div>
+</body>
+</html>

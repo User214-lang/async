@@ -1,0 +1,45 @@
+max_concurrent: 5
+timeout_total: 20
+timeout_connect: 3
+timeout_read: 3
+requests_per_second: 2.0
+min_delay: 0.3
+jitter: 0.2
+user_agent: "MyCrawler/2.0"
+
+start_urls:
+  - "https://example.com"
+  - "https://httpbin.org"
+
+max_pages: 50
+max_depth: 2
+
+filters:
+  same_domain_only: true
+  exclude_patterns:
+    - "/admin"
+    - "/private"
+  include_patterns: []
+
+storage:
+  type: "sqlite"
+  path: "results/crawler_results.db"
+  batch_size: 50
+
+logging:
+  level: "INFO"
+  file: "results/crawler.log"
+  console: true
+
+retry_max_attempts: 3
+retry_backoff_factor: 2.0
+transient_retry_max: 5
+network_retry_max: 2
+rate_limit_retry_max: 4
+rate_limit_retry_backoff: 5.0
+
+circuit_breaker_threshold: 3
+circuit_breaker_window: 30
+circuit_breaker_cooldown: 20
+
+sitemap_url: "https://example.com/sitemap.xml"

@@ -1,0 +1,4 @@
+url,title,text,links,metadata,crawled_at,status_code,content_type,text_length,images_count,headings,error
+https://httpbin.org/status/404,,,[],{},2026-08-03T23:49:34.540415,0,,,,,404 NOT FOUND
+https://httpbin.org/status/200,,,[],{},2026-08-03T23:49:35.547402,200,text/html; charset=utf-8,0,,"{""h1"": [], ""h2"": [], ""h3"": []}",
+https://example.com,Example Domain,Example Domain Example Domain This domain is for use in documentation examples without needing permission. Avoid use in operations. Learn more,"[""https://iana.org/domains/example""]",{},2026-08-03T23:49:36.034015,200,text/html,142,,"{""h1"": [""Example Domain""], ""h2"": [], ""h3"": []}",

@@ -1,0 +1,111 @@
+{
+  "url": "https://httpbin.org/status/404",
+  "error": "404 NOT FOUND",
+  "crawled_at": "2026-08-03T23:15:00.335080",
+  "status_code": 0,
+  "content_type": "",
+  "text": "",
+  "title": "",
+  "links": [],
+  "metadata": {}
+}
+{
+  "url": "https://example.com",
+  "title": "Example Domain",
+  "text": "Example Domain Example Domain This domain is for use in documentation examples without needing permission. Avoid use in operations. Learn more",
+  "links": [
+    "https://iana.org/domains/example"
+  ],
+  "metadata": {},
+  "crawled_at": "2026-08-03T23:15:00.808622",
+  "status_code": 200,
+  "content_type": "text/html",
+  "text_length": 142,
+  "images": [],
+  "headings": {
+    "h1": [
+      "Example Domain"
+    ],
+    "h2": [],
+    "h3": []
+  },
+  "error": ""
+}
+{
+  "url": "https://httpbin.org/status/200",
+  "title": "",
+  "text": "",
+  "links": [],
+  "metadata": {},
+  "crawled_at": "2026-08-03T23:15:01.702948",
+  "status_code": 200,
+  "content_type": "text/html; charset=utf-8",
+  "text_length": 0,
+  "images": [],
+  "headings": {
+    "h1": [],
+    "h2": [],
+    "h3": []
+  },
+  "error": ""
+}
+{
+  "url": "https://httpbin.org/status/404",
+  "error": "404 NOT FOUND",
+  "crawled_at": "2026-08-03T23:17:58.076575",
+  "status_code": 0,
+  "content_type": "",
+  "text": "",
+  "title": "",
+  "links": [],
+  "metadata": {}
+}
+{
+  "url": "https://example.com",
+  "title": "Example Domain",
+  "text": "Example Domain Example Domain This domain is for use in documentation examples without needing permission. Avoid use in operations. Learn more",
+  "links": [
+    "https://iana.org/domains/example"
+  ],
+  "metadata": {},
+  "crawled_at": "2026-08-03T23:17:58.548852",
+  "status_code": 200,
+  "content_type": "text/html",
+  "text_length": 142,
+  "images": [],
+  "headings": {
+    "h1": [
+      "Example Domain"
+    ],
+    "h2": [],
+    "h3": []
+  },
+  "error": ""
+}
+{
+  "url": "https://httpbin.org/status/200",
+  "title": "",
+  "text": "",
+  "links": [],
+  "metadata": {},
+  "crawled_at": "2026-08-03T23:17:59.032099",
+  "status_code": 200,
+  "content_type": "text/html; charset=utf-8",
+  "text_length": 0,
+  "images": [],
+  "headings": {
+    "h1": [],
+    "h2": [],
+    "h3": []
+  },
+  "error": ""
+}
+{"url": "https://httpbin.org/status/200", "title": "", "text": "", "links": [], "metadata": {}, "crawled_at": "2026-08-03T23:35:57.216066", "status_code": 200, "content_type": "text/html; charset=utf-8", "text_length": 0, "images": [], "headings": {"h1": [], "h2": [], "h3": []}, "error": ""}
+{"url": "https://example.com", "title": "Example Domain", "text": "Example Domain Example Domain This domain is for use in documentation examples without needing permission. Avoid use in operations. Learn more", "links": ["https://iana.org/domains/example"], "metadata": {}, "crawled_at": "2026-08-03T23:35:57.817671", "status_code": 200, "content_type": "text/html", "text_length": 142, "images": [], "headings": {"h1": ["Example Domain"], "h2": [], "h3": []}, "error": ""}
+{"url": "https://httpbin.org/status/404", "error": "404 NOT FOUND", "crawled_at": "2026-08-03T23:35:58.124464", "status_code": 0, "content_type": "", "text": "", "title": "", "links": [], "metadata": {}}
+{"url": "https://httpbin.org/status/200", "title": "", "text": "", "links": [], "metadata": {}, "crawled_at": "2026-08-03T23:39:08.650833", "status_code": 200, "content_type": "text/html; charset=utf-8", "text_length": 0, "images": [], "headings": {"h1": [], "h2": [], "h3": []}, "error": ""}
+{"url": "https://example.com", "title": "Example Domain", "text": "Example Domain Example Domain This domain is for use in documentation examples without needing permission. Avoid use in operations. Learn more", "links": ["https://iana.org/domains/example"], "metadata": {}, "crawled_at": "2026-08-03T23:39:09.391850", "status_code": 200, "content_type": "text/html", "text_length": 142, "images": [], "headings": {"h1": ["Example Domain"], "h2": [], "h3": []}, "error": ""}
+{"url": "https://httpbin.org/status/404", "error": "404 NOT FOUND", "crawled_at": "2026-08-03T23:39:09.705066", "status_code": 0, "content_type": "", "text": "", "title": "", "links": [], "metadata": {}}
+{"url": "https://httpbin.org/status/404", "error": "404 NOT FOUND", "crawled_at": "2026-08-03T23:49:34.540415", "status_code": 0, "content_type": "", "text": "", "title": "", "links": [], "metadata": {}}
+{"url": "https://httpbin.org/status/200", "title": "", "text": "", "links": [], "metadata": {}, "crawled_at": "2026-08-03T23:49:35.547402", "status_code": 200, "content_type": "text/html; charset=utf-8", "text_length": 0, "images": [], "headings": {"h1": [], "h2": [], "h3": []}, "error": ""}
+{"url": "https://example.com", "title": "Example Domain", "text": "Example Domain Example Domain This domain is for use in documentation examples without needing permission. Avoid use in operations. Learn more", "links": ["https://iana.org/domains/example"], "metadata": {}, "crawled_at": "2026-08-03T23:49:36.034015", "status_code": 200, "content_type": "text/html", "text_length": 142, "images": [], "headings": {"h1": ["Example Domain"], "h2": [], "h3": []}, "error": ""}

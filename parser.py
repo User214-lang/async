@@ -5,7 +5,6 @@ from urllib.parse import urljoin, urlparse
 
 logger = logging.getLogger(__name__)
 
-
 class HTMLParser:
 
     @staticmethod
@@ -30,16 +29,16 @@ class HTMLParser:
         allowed_domains: Optional[List[str]] = None
     ) -> List[str]:
         links = []
-
         base_domain = cls._get_domain(base_url) if filter_external else None
         allowed_domains_set = set(allowed_domains) if allowed_domains else set()
-        allowed_domains_set.add(base_domain) if base_domain else None
+        if base_domain:
+            allowed_domains_set.add(base_domain)
 
         for a_tag in soup.find_all('a', href=True):
             href = a_tag['href']
-            absolute_url = urljoin(base_url, href)
-            if not absolute_url or absolute_url.startswith('#'):
+            if not href or href.startswith('#'):
                 continue
+            absolute_url = urljoin(base_url, href).split('#')[0]
             if not cls._is_valid_url(absolute_url):
                 continue
             if filter_external:
