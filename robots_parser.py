@@ -85,8 +85,7 @@ class RobotsParser:
         return self._crawl_delay_cache.get(domain, self._default_crawl_delay)
 
     async def wait_for_crawl_delay(self, domain: str, user_agent: str = "*") -> None:
-        key = (domain, user_agent)
-        crawl_delay = self._crawl_delay_cache.get(key, self._default_crawl_delay)
+        crawl_delay = self._crawl_delay_cache.get(domain, self._default_crawl_delay)
         if crawl_delay <= 0:
             return
         now = time.monotonic()
@@ -97,15 +96,15 @@ class RobotsParser:
             logger.debug(f"Ожидание {wait_time:.2f} сек для домена {domain} (Crawl-delay для {user_agent})")
             await asyncio.sleep(wait_time)
         self._last_request_time[domain] = time.monotonic()
+
     async def ensure_robots_fetched(self, url: str, user_agent: str = "*") -> None:
         domain = urlparse(url).netloc
-        if (domain, user_agent) not in self._cache:
+        if domain not in self._cache:
             await self.fetch_robots(url)
 
     def is_allowed(self, url: str, user_agent: str = "*") -> bool:
         domain = urlparse(url).netloc
-        key = (domain, user_agent)
-        parser = self._cache.get(key)
+        parser = self._cache.get(domain)
         if parser is None:
             return True
         try:

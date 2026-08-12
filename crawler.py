@@ -18,6 +18,7 @@ from circuit_breaker import CircuitBreakerManager, CircuitBreakerOpenError
 from storage import DataStorage
 from crawler_stats import CrawlerStats
 from sitemap_parser import SitemapParser
+from advanced_crawler import AdvancedCrawler
 
 logger = logging.getLogger(__name__)
 
@@ -68,6 +69,7 @@ class AsyncCrawler:
         per_domain_limit=per_domain_limit
         )
         self.queue = CrawlerQueue()
+        self._processed_lock = asyncio.Lock()
 
         if isinstance(user_agent, str):
             self.user_agents = [user_agent]
@@ -440,7 +442,8 @@ class AsyncCrawler:
         max_depth: int = 3,
         same_domain_only: bool = True,
         exclude_patterns: Optional[List[str]] = None,
-        include_patterns: Optional[List[str]] = None
+        include_patterns: Optional[List[str]] = None,
+        sitemap_url: Optional[str] = None
     ) -> Dict[str, str]:
         allowed_domains = set()
         if same_domain_only and start_urls:
@@ -452,6 +455,26 @@ class AsyncCrawler:
         for url in start_urls:
             await self.queue.add_url(url, priority=0, depth=0)
 
+        effective_sitemap_url = sitemap_url or self._initial_sitemap_url
+        if effective_sitemap_url:
+            try:
+                logger.info(f"Загрузка URL из sitemap: {effective_sitemap_url}")
+                sitemap_urls = await self.sitemap_parser.fetch_all_urls(effective_sitemap_url)
+                if sitemap_urls:
+                    added_count = 0
+                    for url in sitemap_urls:
+                        await self.queue.add_url(url, priority=1, depth=0)
+                        added_count += 1
+                        if same_domain_only:
+                            domain = urlparse(url).netloc
+                            if domain:
+                                allowed_domains.add(domain)
+                    logger.info(f"Добавлено {added_count} URL из sitemap")
+                else:
+                    logger.warning("Sitemap не содержит URL или не удалось его загрузить")
+            except Exception as e:
+                logger.error(f"Ошибка загрузки sitemap {effective_sitemap_url}: {e}")
+
         results = {}
         processed = 0
         start_time = time.monotonic()
@@ -461,15 +484,24 @@ class AsyncCrawler:
 
         async def worker():
             nonlocal processed, last_print_time
-            while not self.queue.is_empty and processed < max_pages:
+            while True:
+                async with self._processed_lock:
+                    if processed >= max_pages:
+                        break
+
                 logger.debug(f"Воркер: очередь не пуста? {not self.queue.is_empty}, processed={processed}, max_pages={max_pages}")
                 item = await self.queue.get_next()
                 if item is None:
-                    break
+                    if self.queue.in_progress == 0:
+                        logger.debug("Воркер выходит: очередь пуста и нет активных задач")
+                        break
+                    await asyncio.sleep(0.1)
+                    continue
                 url, depth = item
 
                 if depth > max_depth:
                     logger.debug(f"Пропуск {url} из-за глубины {depth} > {max_depth}")
+                    self.queue.mark_processed(url)
                     continue
 
                 try:
@@ -477,7 +509,9 @@ class AsyncCrawler:
                     self.processed_urls[url] = html
                     self.visited_urls.add(url)
                     results[url] = html
-                    processed += 1
+                    async with self._processed_lock:
+                        processed += 1
+                    self.queue.mark_processed(url)
 
                     parser = HTMLParser()
                     soup = BeautifulSoup(html, 'lxml')
@@ -505,6 +539,7 @@ class AsyncCrawler:
                     self.visited_urls.add(url)
                     results[url] = f"ERROR: {e}"
                     await self._save_error(url, str(e))
+                    self.queue.mark_failed(url, str(e))
 
                 now = time.monotonic()
                 if now - last_print_time >= print_interval:
@@ -566,3 +601,4 @@ class AsyncCrawler:
         return results
         print()
 
+__all__ = ['AsyncCrawler', 'AdvancedCrawler']

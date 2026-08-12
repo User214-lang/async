@@ -18,6 +18,7 @@ class CrawlerQueue:
         self._total_added = 0
         self._total_processed = 0
         self._total_failed = 0
+        self._in_progress = 0
 
     async def add_url(self, url: str, priority: int = 0, depth: int = 0) -> None:
         if url in self._visited or url in self._pending:
@@ -34,6 +35,7 @@ class CrawlerQueue:
                 self._queue.get(), timeout=0.1
             )
             self._pending.discard(url)
+            self._in_progress += 1
             return url, depth
         except asyncio.TimeoutError:
             return None
@@ -43,12 +45,16 @@ class CrawlerQueue:
             self._processed.add(url)
             self._total_processed += 1
             self._visited.add(url)
+            if self._in_progress > 0:
+                self._in_progress -= 1
 
     def mark_failed(self, url: str, error: str) -> None:
         if url not in self._failed:
             self._failed[url] = error
             self._total_failed += 1
             self._visited.add(url)
+            if self._in_progress > 0:
+                self._in_progress -= 1
 
     def is_visited(self, url: str) -> bool:
         return url in self._visited
@@ -71,3 +77,7 @@ class CrawlerQueue:
     @property
     def size(self) -> int:
         return self._queue.qsize()
+
+    @property
+    def in_progress(self) -> int:
+        return self._in_progress
