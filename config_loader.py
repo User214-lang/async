@@ -16,7 +16,7 @@ class ConfigLoader:
 
     @staticmethod
     def create_storage(config: Dict[str, Any]) -> Optional[DataStorage]:
-        storage_cfg = config.get('storage', {})
+        storage_cfg = config.get('storage') or {}
         storage_type = storage_cfg.get('type')
         if not storage_type:
             return None

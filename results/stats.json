@@ -1,44 +1,20 @@
 {
-  "total_processed": 3109,
-  "successful_requests": 3004,
-  "failed_requests": 105,
-  "duration": 5086.71840848701,
-  "average_speed": 0.6111995495588558,
-  "avg_response_time": 0.8147359838787885,
+  "total_processed": 5,
+  "successful_requests": 1,
+  "failed_requests": 4,
+  "duration": 8.49091448199988,
+  "average_speed": 0.5888647224747859,
+  "avg_response_time": 0.13930094299985285,
   "status_code_distribution": {
-    "200": 3004,
-    "error": 105
+    "error": 4,
+    "200": 1
   },
   "top_domains": [
     [
-      "books.toscrape.com",
-      2351
-    ],
-    [
-      "quotes.toscrape.com",
-      653
-    ],
-    [
       "httpbin.org",
-      95
-    ],
-    [
-      "www.goodreads.com",
-      4
-    ],
-    [
-      "www.zyte.com",
-      4
-    ],
-    [
-      "this-domain-definitely-does-not-exist-12345.com",
-      1
-    ],
-    [
-      "nonexistent-test-domain-98765.com",
-      1
+      5
     ]
   ],
-  "start_time": "1970-01-01T23:50:39.631113",
-  "end_time": "1970-01-02T01:15:26.349522"
+  "start_time": "1970-01-01T03:52:46.176814",
+  "end_time": "1970-01-01T03:52:54.667729"
 }

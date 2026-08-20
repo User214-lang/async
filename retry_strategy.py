@@ -97,18 +97,17 @@ class RetryStrategy:
                         current_backoff_factor = self.network_backoff_factor
                     error_type_set = True
 
-                if attempt > current_max_retries:
+                if attempt >= current_max_retries:
                     logger.error(
                         f"Превышено максимальное число попыток ({current_max_retries}) для {type(e).__name__}: {e}"
                     )
                     raise
 
-                if attempt < current_max_retries:
-                    delay = current_backoff_factor ** attempt
-                    logger.warning(
-                        f"Попытка {attempt} не удалась ({e}). Повтор через {delay} сек"
-                    )
-                    await asyncio.sleep(delay)
+                delay = current_backoff_factor ** attempt
+                logger.warning(
+                    f"Попытка {attempt} не удалась ({e}). Повтор через {delay} сек"
+                )
+                await asyncio.sleep(delay)
 
     def get_retry_stats(self) -> dict:
         return {

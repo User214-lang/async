@@ -3,7 +3,7 @@ import aiohttp
 import logging
 from urllib.robotparser import RobotFileParser
 from urllib.parse import urlparse, urljoin
-from typing import Dict, Optional
+from typing import Dict, Optional, Set
 import time
 
 logger = logging.getLogger(__name__)
@@ -15,6 +15,7 @@ class RobotsParser:
         self._cache: Dict[str, RobotFileParser] = {}
         self._crawl_delay_cache: Dict[str, float] = {}
         self._last_request_time: Dict[str, float] = {}
+        self._failed_domains: set = set()
         self._default_crawl_delay = 1.0
 
     async def fetch_robots(self, base_url: str) -> dict:
@@ -40,17 +41,17 @@ class RobotsParser:
                     self._crawl_delay_cache[domain] = crawl_delay
                     logger.info(f"Robots.txt для {domain} загружен, crawl_delay={crawl_delay}")
                 else:
-                    self._cache[domain] = RobotFileParser()
+                    self._failed_domains.add(domain)
                     self._crawl_delay_cache[domain] = self._default_crawl_delay
                     logger.warning(f"Robots.txt для {domain} не загружен (статус {response.status})")
 
         except asyncio.TimeoutError:
             logger.warning(f"Таймаут загрузки robots.txt для {domain}")
-            self._cache[domain] = RobotFileParser()
+            self._failed_domains.add(domain)
             self._crawl_delay_cache[domain] = self._default_crawl_delay
         except Exception as e:
             logger.error(f"Ошибка загрузки robots.txt для {domain}: {e}")
-            self._cache[domain] = RobotFileParser()
+            self._failed_domains.add(domain)
             self._crawl_delay_cache[domain] = self._default_crawl_delay
         finally:
             if close_session and self._session:
@@ -99,11 +100,13 @@ class RobotsParser:
 
     async def ensure_robots_fetched(self, url: str, user_agent: str = "*") -> None:
         domain = urlparse(url).netloc
-        if domain not in self._cache:
+        if domain not in self._cache or domain in self._failed_domains:
             await self.fetch_robots(url)
 
     def is_allowed(self, url: str, user_agent: str = "*") -> bool:
         domain = urlparse(url).netloc
+        if domain in self._failed_domains:
+            return True
         parser = self._cache.get(domain)
         if parser is None:
             return True

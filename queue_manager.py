@@ -34,7 +34,6 @@ class CrawlerQueue:
             priority, depth, timestamp, url = await asyncio.wait_for(
                 self._queue.get(), timeout=0.1
             )
-            self._pending.discard(url)
             self._in_progress += 1
             return url, depth
         except asyncio.TimeoutError:
@@ -45,6 +44,7 @@ class CrawlerQueue:
             self._processed.add(url)
             self._total_processed += 1
             self._visited.add(url)
+            self._pending.discard(url)
             if self._in_progress > 0:
                 self._in_progress -= 1
 
@@ -53,6 +53,7 @@ class CrawlerQueue:
             self._failed[url] = error
             self._total_failed += 1
             self._visited.add(url)
+            self._pending.discard(url)
             if self._in_progress > 0:
                 self._in_progress -= 1
 

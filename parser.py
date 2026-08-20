@@ -200,6 +200,7 @@ class HTMLParser:
             'title': metadata['title'],
             'description': metadata['description'],
             'keywords': metadata['keywords'],
+            'metadata': metadata,
             'text': text,
             'links': links,
             'images': images,
